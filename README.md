@@ -1,5 +1,4 @@
 ## QR Code Generator for SQLite
-==========
 
 This Python project generates unique combinations of names and stores them in an SQLite database to be used to generate QRcodes via API GET.
 
