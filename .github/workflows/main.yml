@@ -24,6 +24,6 @@ jobs:
     runs-on: ubuntu-latest 
     steps:
       - name: Unit Test
-        working-directory: /qrgenerator
+        working-directory: qrgenerator
         run: python -m unittest
     
