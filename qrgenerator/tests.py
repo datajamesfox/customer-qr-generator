@@ -18,7 +18,8 @@ class TestDatabase(unittest.TestCase):
     def test_create_database(self):
         conn = sqlite3.connect(f'{self.database}.db')
         cur = conn.cursor()
-        cur.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name='{self.table}'")
+        cur.execute(f"""SELECT name FROM sqlite_master WHERE type='table' AND
+                    name='{self.table}'""")
         table_exists = cur.fetchone()
         self.assertIsNotNone(table_exists)
         cur.close()

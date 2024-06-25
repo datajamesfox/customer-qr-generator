@@ -27,10 +27,12 @@ class Database:
         # Create database table if it does not exist.
         try:
             cur.execute(f'''CREATE TABLE IF NOT EXISTS {self.table} (
-                                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                                        id INTEGER PRIMARY KEY AUTOINCREMENT
+                                        NOT NULL,
                                         FirstName TEXT,
                                         LastName TEXT,
-                                        CreatedDatetime DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL
+                                        CreatedDatetime DATETIME DEFAULT
+                                        CURRENT_TIMESTAMP NOT NULL
                                     )''')
             conn.commit()
             print(f"Table '{self.table}' created successfully.")
@@ -54,7 +56,9 @@ class Database:
 
         # Insert into table from list
         try:
-            cur.executemany(f'INSERT INTO {self.table} (FirstName, LastName) VALUES (?, ?)', name_list)
+            cur.executemany(
+                f"""INSERT INTO {self.table} (FirstName, LastName)
+                VALUES (?, ?)""", name_list)
             conn.commit()
 
         except Exception as e:
