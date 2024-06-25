@@ -18,3 +18,7 @@ SQLite - database is set as database.db as default. Table is set as race_entrant
     SELECT * FROM race_entrants;
 
 Run tests.py for unit testing.
+
+### Continuous Integration
+-----
+CI implemented with GitHub Actions to run unit tests and lint checks.
