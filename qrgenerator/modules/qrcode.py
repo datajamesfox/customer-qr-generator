@@ -24,7 +24,8 @@ class Qrcode:
         """
 
         # API URL
-        url = f'https://image-charts.com/chart?chs=150x150&cht=qr&chl={self.id}=UTF-8'
+        url = f"""https://image-charts.com/chart?chs=150x150&cht=qr&chl={self.id}
+                =UTF-8"""
 
         # Ensure folder exists for qrcodes, if not - mkdir
         os.makedirs('qrcodes', exist_ok=True)
