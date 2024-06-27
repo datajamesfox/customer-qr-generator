@@ -3,6 +3,7 @@ Module to manage SQLite database operations.
 """
 
 import sqlite3
+import logging
 
 
 class Database:
@@ -12,10 +13,11 @@ class Database:
 
     def __init__(self, database, table):
         """
-        Initialize with database and table names.
+        Initialize with database and table names. Initialise Logging.
         """
         self.database = database
         self.table = table
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def create_database(self):
         """
@@ -35,10 +37,10 @@ class Database:
                                         CURRENT_TIMESTAMP NOT NULL
                                     )''')
             conn.commit()
-            print(f"Table '{self.table}' created successfully.")
+            self.logger.info(f"Table '{self.table}' created successfully.")
 
         except Exception as e:
-            print(f"Error: {e}")
+            self.logger.error(f"Error: {e}", exc_info=True)
             conn.rollback()
 
         finally:
@@ -62,7 +64,7 @@ class Database:
             conn.commit()
 
         except Exception as e:
-            print(f"Error: {e}")
+            logging.error(f"Error: {e}")
             conn.rollback()
 
         finally:

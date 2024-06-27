@@ -6,6 +6,7 @@ from modules import Database, NamePermutations, Qrcode
 from multiprocessing import Pool
 import sqlite3
 import time
+import logging
 
 
 def save_qrcodes(database_name, table_name):
@@ -36,6 +37,12 @@ def save_qrcodes(database_name, table_name):
 
 
 def main():
+    # Set Logging Config
+    logging.basicConfig(
+        level=logging.INFO,
+        filename="filename.log",
+        format="%(asctime)s - %(name)s - %(funcName)s - %(message)s")
+
     # List of names
     names = ['riley', 'james', 'ryan', 'joshi', 'andrew']
 
@@ -60,8 +67,8 @@ def main():
     with Pool(processes=2) as pool:
         pool.map(db.insert_rows, [batch_1, batch_2])
 
-    # Get and save QRcodes from table ID
-    save_qrcodes(database_name, table_name)
+        # Get and save QRcodes from table ID
+        save_qrcodes(database_name, table_name)
 
 
 if __name__ == "__main__":

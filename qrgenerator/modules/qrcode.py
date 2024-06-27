@@ -4,6 +4,7 @@ Module to manage QRcodes API calls and file saves.
 
 import os
 import requests
+import logging
 
 
 class Qrcode:
@@ -14,9 +15,10 @@ class Qrcode:
 
     def __init__(self, id):
         """
-        Initialize with id.
+        Initialize with id. Initialise Logging.
         """
         self.id = id
+        self.logger = logging.getLogger(self.__class__.__name__)
 
     def get_qr(self):
         """
@@ -40,16 +42,17 @@ class Qrcode:
 
         except requests.RequestException as e:
             Qrcode.error_count += 1
-            print(f"Failed response: {e}")
+            self.logger.error(f"Failed response: {e}", exc_info=True)
 
         except IOError as e:
             Qrcode.error_count += 1
-            print(f"Failed to write file: {e}")
+            self.logger.error(f"Failed to write file: {e}", exc_info=True)
 
         except Exception as e:
             Qrcode.error_count += 1
-            print(f"An unexpected error occurred: {e}")
+            self.logger.error(f"An unexpected error occurred: {
+                              e}", exc_info=True)
 
         if Qrcode.error_count >= 10:
-            print("Reached 10 errors. Stopping process.")
+            logging.error("Reached 10 errors. Stopping process.")
             return
